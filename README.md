@@ -33,7 +33,7 @@ In this project, SQL techniques were applied using Google BigQuery to analyze th
   - **Product Performance & Conversion Optimization**: Analyze `related products purchased by customers` (to identify product affinity and potential cross-selling opportunities) and calculate `cohort map` from product view to addtocart to purchasec (to identify conversion rates and shopping behavior).
 ## **IV. EXPLORE THE DATASET**
 ### **Query 1: Calculate total visit, pageview, transaction for Jan, Feb and March 2017**
-```
+```SQL
 SELECT FORMAT_DATE('%Y%m',PARSE_DATE('%Y%m%d',date)) month
       ,SUM(totals.visits) visits
       ,SUM(totals.pageviews) pageviews
@@ -53,7 +53,7 @@ ORDER BY 1;
 
 ### **Query 2: Bounce rate per traffic source in July 2017**
 - Bounce_rate = num_bounce/total_visit
-```
+```SQL
 SELECT trafficSource.`source` AS source
       ,SUM(totals.visits) AS total_visits
       ,COUNT(totals.bounces) AS total_no_of_bounces
@@ -80,7 +80,7 @@ ORDER BY 2 DESC;
 :point_right: Google generates the highest traffic, yet it also experiences a high bounce rate. Both YouTube and Facebook exhibit the highest bounce rates, whereas other sources of traffic such as direct,dfa,reddit,etc. demonstrates stronger user engagement. A targeted marketing strategy should be implemented to reduce bounce rates, particularly from high-bounce sources such as Google, YouTube, and Facebook.
 
 ### **Query 3: Revenue by traffic source by week, by month in June 2017**
-```
+```SQL
 WITH 
 month_data AS(
       SELECT 'Month' AS time_type
@@ -165,7 +165,7 @@ ORDER BY time_type, time, revenue DESC;
 :point_right: Direct traffic and Google consistently rank as the highest and second-highest sources of revenue over both weekly and monthly periods
 
 ### **Query 4: Average number of pageviews by purchaser type (purchasers vs non-purchasers) in June, July 2017**
-```
+```SQL
 WITH 
 month_data AS(
       SELECT 'Month' AS time_type
@@ -206,7 +206,7 @@ ORDER BY time_type, time, revenue DESC;
 :point_right: Non-purchasers display a notably higher average number of pageviews compared to purchasers. However, both groups experienced an increase in pageviews from June to July, with purchasers demonstrating a more pronounced relative growth.
 
 ### **Query 5: Average number of transactions per user that made a purchase in July 2017**
-```
+```SQL
 SELECT FORMAT_DATE('%Y%m',PARSE_DATE('%Y%m%d',date)) month
       ,SUM (totals.transactions)/COUNT(DISTINCT fullVisitorId) AS avg_total_transactions_per_user
 FROM `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`,
@@ -223,7 +223,7 @@ GROUP BY 1;
 :point_right: In July 2017, each user made an average of approximately 4.16 transactions.
 
 ### **Query 6: Average amount of money spent per session. Only include purchaser data in July 2017**
-```
+```SQL
 SELECT 
       FORMAT_DATE('%Y%m',PARSE_DATE('%Y%m%d',date)) month
       ,ROUND((SUM(product.productRevenue)/SUM(totals.visits))/1000000,2) AS avg_revenue_by_user_per_visit
@@ -240,7 +240,7 @@ GROUP BY 1;
 :point_right: In July 2017, purchasing users incurred an average expenditure of $43.86 per session. This metric serves as an indicator of the typical transaction value, providing valuable insights for understanding customer spending patterns and refining pricing strategies.
 
 ### **Query 7: Other products purchased by customers who purchased product "YouTube Men's Vintage Henley" in July 2017**
-```
+```SQL
 SELECT 
       product.v2ProductName AS other_purchased_products
       ,SUM(product.productQuantity) AS quantity
@@ -278,7 +278,7 @@ ORDER BY 2 DESC;
 - Add_to_cart_rate = number product add to cart / number product view.
 - Purchase_rate = number product purchase/number product view.
 
-```
+```SQL
 WITH total_num AS(
       SELECT 
             FORMAT_DATE('%Y%m',PARSE_DATE('%Y%m%d',date)) month
