@@ -1,6 +1,6 @@
 # [SQL] E-Commerce Website Performance Analysis
 ## **I. INTRODUCTION**
-In this project, **business performance of an e-commerce website** was analyzed using **SQL** in **Google BigQuery**, with some advanced SQL techniques like **window function** and **aggregate function**. The analysis covered critical business aspects such as **website traffic, customer behavior patterns, revenue generation, sales performance,** and **conversion optimization**. The **insights** derived from this work provided support to the Sales and Marketing teams, enabling them to make informed, data-driven decisions.
+In this project, **_business performance of an e-commerce website_** was analyzed using **_SQL_** in **_Google BigQuery_**, with some advanced SQL techniques like **_window function_** and **_aggregate function_**. The analysis covered critical business aspects such as **_website traffic, customer behavior patterns, revenue generation, sales performance,_** and **_conversion optimization_**. The **_insights_** derived from this work provided **_support to the Sales and Marketing teams_**, enabling them to make informed, data-driven decisions.
 ## **II. DATASET**
 - The e-commerce dataset is stored in a public Google BigQuery dataset under ID: `bigquery-public-data.google_analytics_sample.ga_sessions`.
   
@@ -26,11 +26,11 @@ In this project, **business performance of an e-commerce website** was analyzed 
   | hits.product.v2ProductName	| STRING	| Product Name.| 
   | fullVisitorId	| STRING	| The unique visitor ID.|
 ## **III. KEY AREAS TO ANALYZE**
-  - **Website Traffic & User Behavior:** Analyze traffic patterns (`total visits, pageviews`), user engagement (`bounce rate`), and how different types of users (purchasers vs. non-purchasers) behave in terms of pageviews.
+  - **_Website Traffic & User Behavior:_** Analyze traffic patterns (`total visits, pageviews`), user engagement (`bounce rate`), and how different types of users (purchasers vs. non-purchasers) behave in terms of pageviews.
 
-  - **Sales Performance & Revenue Analysis:** Evaluate the `revenue generated` from different traffic sources over time (by week and month).
+  - **_Sales Performance & Revenue Analysis:_** Evaluate the `revenue generated` from different traffic sources over time (by week and month).
     
-  - **Product Performance & Conversion Optimization**: Analyze `related products purchased by customers` (to identify product affinity and potential cross-selling opportunities) and calculate `cohort map` from product view to addtocart to purchasec (to identify conversion rates and shopping behavior).
+  - **_Product Performance & Conversion Optimization_**: Analyze `related products purchased by customers` (to identify product affinity and potential cross-selling opportunities) and calculate `cohort map` from product view to addtocart to purchasec (to identify conversion rates and shopping behavior).
 ## **IV. EXPLORE THE DATASET**
 ### **Query 1: Calculate total visit, pageview, transaction for Jan, Feb and March 2017**
 ```SQL
@@ -49,7 +49,7 @@ ORDER BY 1;
 | 201702	| 62192	| 233373	| 733| 
 | 201703	| 69931	| 259522	| 993| 
 
-:arrow_right: In March 2017, there was a notable improvement across all key metrics (visits, pageviews, and transactions) compared to January and February. This increase could indicate either improved conversion rates or influence of seasonal factors only.
+:arrow_right: In March 2017, there was a notable **_improvement across all key metrics_** (visits, pageviews, and transactions) compared to January and February. This increase could indicate either **_improved conversion rates_** or **_influence of seasonal factors_** only.
 
 ### **Query 2: Bounce rate per traffic source in July 2017**
 - Bounce_rate = num_bounce/total_visit
@@ -77,7 +77,7 @@ ORDER BY 2 DESC;
 | reddit.com	| 189	| 54	| 28.571| 
 | qiita.com	| 146	| 72	| 49.315| 
 
-:arrow_right: Google generates the highest traffic, yet it also experiences a high bounce rate. Both YouTube and Facebook exhibit the highest bounce rates, whereas other sources of traffic such as direct,dfa,reddit,etc. demonstrates stronger user engagement. A targeted marketing strategy should be implemented to reduce bounce rates, particularly from high-bounce sources such as Google, YouTube, and Facebook.
+:arrow_right: **_Google_** generates the **_highest traffic_**, yet it also experiences a **_high bounce rate_**. Both **_YouTube and Facebook_** exhibit the **_highest bounce rates_**, whereas other sources of traffic such as direct,dfa,reddit,etc. demonstrates stronger user engagement. A **_targeted marketing strategy_** should be implemented to **_reduce bounce rates_**, particularly **_from high-bounce sources_** such as Google, YouTube, and Facebook.
 
 ### **Query 3: Revenue by traffic source by week, by month in June 2017**
 ```SQL
@@ -162,7 +162,7 @@ ORDER BY time_type, time, revenue DESC;
 | Week	| 201726	| groups.google.com	| 63.37| 
 | Week	| 201726	| yahoo	| 20.39| 
 
-:arrow_right: Direct traffic and Google consistently rank as the highest and second-highest sources of revenue over both weekly and monthly periods
+:arrow_right: **_Direct traffic and Google_** consistently rank as the **_highest and second-highest sources of revenue_** over both weekly and monthly periods
 
 ### **Query 4: Average number of pageviews by purchaser type (purchasers vs non-purchasers) in June, July 2017**
 ```SQL
@@ -203,7 +203,7 @@ ORDER BY time_type, time, revenue DESC;
 | 201706	| 94.02050113895217	| 316.86558846341671| 
 | 201707	| 124.23755186721992	| 334.05655979568053| 
 
-:arrow_right: Non-purchasers display a notably higher average number of pageviews compared to purchasers. However, both groups experienced an increase in pageviews from June to July, with purchasers demonstrating a more pronounced relative growth.
+:arrow_right: **_Non-purchasers_** display a notably **_higher average number of pageviews_** compared to purchasers. However, **_both groups_** experienced an **_increase in pageviews from June to July_**, with **_purchasers_** demonstrating a **_more pronounced relative growth_**.
 
 ### **Query 5: Average number of transactions per user that made a purchase in July 2017**
 ```SQL
@@ -220,7 +220,7 @@ GROUP BY 1;
 | --- | --- |
 | 201707	| 4.16390041493776| 
 
-:arrow_right: In July 2017, each user made an average of approximately 4.16 transactions.
+:arrow_right: In July 2017, **_each user_** made an **_average_** of approximately **_4.16 transactions_**.
 
 ### **Query 6: Average amount of money spent per session. Only include purchaser data in July 2017**
 ```SQL
@@ -237,7 +237,7 @@ GROUP BY 1;
 | --- | --- |
 | 201707	| 43.86| 
 
-:arrow_right: In July 2017, purchasing users incurred an average expenditure of $43.86 per session. This metric serves as an indicator of the typical transaction value, providing valuable insights for understanding customer spending patterns and refining pricing strategies.
+:arrow_right: In July 2017, **_purchasing users_** incurred an **_average expenditure_** of **_$43.86 per session_**. This metric serves as an indicator of the typical transaction value, providing valuable insights for **_understanding customer spending patterns_** and **_refining pricing strategies_**.
 
 ### **Query 7: Other products purchased by customers who purchased product "YouTube Men's Vintage Henley" in July 2017**
 ```SQL
@@ -272,7 +272,7 @@ ORDER BY 2 DESC;
 | Red Shine 15 oz Mug	| 2| 
 | Crunch Noise Dog Toy	| 2| 
 
-:arrow_right: Customers who purchased the YouTube Men's Vintage Henley in July 2017 exhibited a preference for Google-branded products, particularly sunglasses. This trend suggests potential opportunities for cross-selling.
+:arrow_right: **_Customers_** who purchased the **_YouTube Men's Vintage Henley_** in July 2017 exhibited a **_preference_** for **_Google-branded products_**, particularly sunglasses. This trend suggests potential opportunities for **_cross-selling_**.
 
 ### **Query 8: Calculate cohort map from product view to addtocart to purchase in Jan, Feb and March 2017. Output calculated in product level**
 - Add_to_cart_rate = number product add to cart / number product view.
@@ -305,7 +305,7 @@ FROM total_num;
 | 201702	| 21489	| 7360	| 2060	| 34.25	| 9.59| 
 | 201703	| 23549	| 8782	| 2977	| 37.29	| 12.64| 
 
-:arrow_right: The product view-to-purchase conversion rates showed consistent improvement from January to March 2017, with March achieving the highest engagement levels. This trend suggests an increasing effectiveness in converting browsers into buyers, likely attributable to enhanced marketing efforts or an improved user experience.
+:arrow_right: The **_product view-to-purchase conversion rates_** showed **_consistent improvement_** from January to March 2017, with March achieving the highest engagement levels. This trend suggests an **_increasing effectiveness in converting_** browsers into buyers, likely attributable to enhanced marketing efforts or an improved user experience.
 
 ## **V. CONCLUSION**
-In conclusion, my analysis of the eCommerce dataset using SQL on Google BigQuery has uncovered valuable insights into total visits, pageviews, transactions, bounce rates, and revenue per traffic source, which can inform future business decisions. The next step will involve visualizing these insights and key trends using software such as Power BI or Tableau. Overall, this project demonstrates the effectiveness of employing SQL and big data tools like Google BigQuery to derive meaningful insights from large datasets.
+In conclusion, my analysis of the eCommerce dataset using SQL on Google BigQuery has uncovered valuable **_insights into total visits, pageviews, transactions, bounce rates, and revenue per traffic source_**, which can inform future business decisions. The **_next step_** will involve **_visualizing_** these insights and key trends using software such as Power BI or Tableau. Overall, this project demonstrates the **_effectiveness of employing SQL and big data tools_** like Google BigQuery to **_derive meaningful insights from large datasets_**.
