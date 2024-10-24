@@ -1,6 +1,6 @@
 # [SQL] E-Commerce Website Performance Analysis
 ## **I. INTRODUCTION**
-In this project, SQL techniques were applied using Google BigQuery to analyze the performance data of an e-commerce website. The analysis covered critical business aspects such as website traffic, customer behavior patterns, revenue generation, sales performance, and conversion optimization. The insights derived from this work provided support to the Sales and Marketing teams, enabling them to make informed, data-driven decisions.
+In this project, **business performance of an e-commerce website** was analyzed using **SQL** in **Google BigQuery**, with some advanced SQL techniques like **window function** and **aggregate function**. The analysis covered critical business aspects such as **website traffic, customer behavior patterns, revenue generation, sales performance,** and **conversion optimization**. The **insights** derived from this work provided support to the Sales and Marketing teams, enabling them to make informed, data-driven decisions.
 ## **II. DATASET**
 - The e-commerce dataset is stored in a public Google BigQuery dataset under ID: `bigquery-public-data.google_analytics_sample.ga_sessions`.
   
